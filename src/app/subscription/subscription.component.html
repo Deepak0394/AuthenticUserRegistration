@@ -1,0 +1,32 @@
+
+     <div class="mySubscriptionPlans">
+        <div class="text-dark text-center myHeading">
+            <h2> Subscription Plan</h2>
+        </div>
+   
+        <div *ngFor="let list of planList">
+       
+        <div class="form-group ">
+          <ul class="price">
+            
+            <li class="header"  >{{list.planName}}
+            </li>
+            <li class="grey">{{list.planPrice}}</li>
+            <li>{{list.data}}</li>
+            <li>{{list.callLimit}}</li>
+            <li>{{list.smSlimit}}</li>
+            <li>{{list.validity}}Days</li>
+            <li class="grey">
+              <button type="submit" class="btn btn-success p-2 m-2" (click)="buyPlan(list)">Buy Plan </button>
+              <a routerLink="/home" class="btn btn-danger p-2 m-2">Cancel Plan </a>
+            </li>
+
+          </ul>
+        </div>
+        
+   
+      </div>
+        </div>
+
+        
+      
