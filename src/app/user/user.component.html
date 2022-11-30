@@ -148,9 +148,9 @@
             <div class="col">
                 <label for="txtCode" class="col-md-4">Postal Code</label>
                 
-                      <input
+                      <input 
                      
-                       id="txtCode" name="postalCode" type="number" formControlName="postalCode"  placeholder="Postal Code"  class="form-control">
+                       id="txtCode" name="postalCode" type="number" formControlName="postalCode"  placeholder="Postal Code" min="0" minlength="0" maxlength="6"   class="form-control">
                        <div class="text-danger" *ngIf="saveform.controls['postalCode'].hasError('pattern')">
                       6 Digit Pin code Required
                         </div>

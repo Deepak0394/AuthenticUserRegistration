@@ -41,10 +41,13 @@
       <button class="btn btn-hide text-white" ><b>Subscription   </b>    
       </button>
       <div class="set-sidebar-text" id="subPlan">
-        <div *ngIf="loginService.isAdmin()">
+        <div *ngIf="loginService.isAdmin() || loginService.isHospital() ">
           <a  class="btn btn-hide text-white" (click)="gotoAddPlan()">Add Plan</a><br>
-        </div>      
-        <a class="btn btn-hide text-white" (click)="gotoDisPlan()">Plan List</a>
+       
+      
+          <a class="btn btn-hide text-white" (click)="gotoDisPlan()">Plan List</a>
+        </div>  
+       
        </div>  
     </div>  
   </div>

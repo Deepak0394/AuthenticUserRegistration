@@ -106,7 +106,7 @@
                   
                         <input
                        
-                         id="txtVal" name="validity" type="number" formControlName="validity"  placeholder="Validity"  class="form-control">
+                         id="txtVal" name="validity" type="number" min="0" formControlName="validity"  placeholder="Validity"  class="form-control">
                          <div class="text-danger" *ngIf="saveform.controls['validity'].hasError('pattern')">
                        Validity  Required
                           </div>
