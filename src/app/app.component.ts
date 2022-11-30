@@ -12,9 +12,9 @@ export class AppComponent {
   title = 'AuthenticUserRegistration';
   sidebarExpanded = true;
   
-   userDetail=sessionStorage['currentUser'];
-     userData=JSON.parse(this.userDetail);
-     UserNName=this.userData.name;
+  //  userDetail=sessionStorage['currentUser'];
+  //    userData=JSON.parse(this.userDetail);
+  //    UserNName=this.userData.name;
  
   constructor(public loginService:LoginService){}
   logout()

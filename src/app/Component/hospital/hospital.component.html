@@ -33,10 +33,10 @@
             </tr>
         </tbody>
     </table>
-    <form [formGroup]="saveform">
+    <form [formGroup]="saveform"(ngSubmit)="saveClick();" novalidate>
         <!-- Create -->
         <!-- Header -->
-        <div class="modal" role="dialog" id="newModal">
+        <div class="modal" (click)="test1()" role="dialog" id="newModal">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -189,7 +189,7 @@
                     </div>
                     <!-- <footer> -->
                     <div class="modal-footer">
-                        <button (click)="saveClick()" type="submit" class="btn btn-success" >Save</button>
+                        <button  type="submit" class="btn btn-success" >Save</button>
                         <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
                     </div>
                 </div>

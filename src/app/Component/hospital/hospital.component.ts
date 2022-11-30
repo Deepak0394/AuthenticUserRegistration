@@ -62,6 +62,13 @@ export class HospitalComponent implements OnInit {
       }
     )
   }
+  test1(){
+    debugger;
+    this.saveform.reset();
+    this.submitted=false
+    this.clearRec();
+  }
+
   changeDepartment(event:any){
     this.Department?.setValue(event.target.value,{
       onlySelf: true,
@@ -86,57 +93,58 @@ export class HospitalComponent implements OnInit {
     }
 
     saveClick()
-  {debugger
-    this.saveform.value.phoneNumber =this.saveform.value.phoneNumber.internationalNumber
-    if(this.saveform.invalid)
-    {
-      this.submitted = true;
-      return console.error(this.saveform.errors);
-      ;
-    }
-    debugger
-    //alert(this.newHospital.doctorId)
-    this.hospitalService.saveHospital(this.saveform.value).subscribe(
-      (response)=>{
-        debugger
-        this.emailAlredyExist=response.email
-        console.log(this.emailAlredyExist)
-        this.userNameExist=response.userName
-        console.log(this.userNameExist)
-        this.phonenumberExist=response.phoneNumber
-        console.log(this.phonenumberExist)
-
-if(this.emailAlredyExist==this.saveform.value.email )
-{
-this.existemlname=true;
-}
-else if(this.userNameExist==this.saveform.value.userName )
-{
- this.existusrname=true;
-}
-
-else if(this.phonenumberExist==this.saveform.value.phoneNumber )
-{
- this.existphnname=true;
-}
-else
-{
-  this.route.navigateByUrl('/hospital')
-  this.saveform.reset();
-  
-  // this.getHospitalAll();
-   this.clearRec();
-  console.log(response)
-  this.toastr.success("Add Successfully!");
-} 
-        
-      },
-      (error)=>{
-        console.log(error);
-
+    {debugger
+      
+      if(this.saveform.invalid)
+      {
+        this.submitted = true;
+        return console.error(this.saveform.errors);
+        ;
       }
-    )
+      this.saveform.value.phoneNumber =this.saveform.value.phoneNumber.internationalNumber
+      debugger
+      //alert(this.newHospital.doctorId)
+      this.hospitalService.saveHospital(this.saveform.value).subscribe(
+        (response)=>{
+          debugger
+          this.emailAlredyExist=response.email
+          console.log(this.emailAlredyExist)
+          this.userNameExist=response.userName
+          console.log(this.userNameExist)
+          this.phonenumberExist=response.phoneNumber
+          console.log(this.phonenumberExist)
+  
+  if(this.emailAlredyExist==this.saveform.value.email )
+  {
+  this.existemlname=true;
   }
+  else if(this.userNameExist==this.saveform.value.userName )
+  {
+   this.existusrname=true;
+  }
+  
+  else if(this.phonenumberExist==this.saveform.value.phoneNumber )
+  {
+   this.existphnname=true;
+  }
+  else
+  {
+    this.route.navigateByUrl('/hospital')
+    this.saveform.reset();
+    
+     this.getHospitalAll();
+     this.clearRec();
+    console.log(response)
+    this.toastr.success("Add Successfully!");
+  } 
+  this.saveform.reset();     
+        },
+        (error)=>{
+          console.log(error);
+  
+        }
+      )
+    }
   clearRec(){
       this.newHospital.hospitalname="";
         this.newHospital.facilities="";
