@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Buysubscription } from '../buysubscription';
-import { BuysubscriptionService } from '../buysubscription.service';
-import { LoginService } from '../login.service';
-import { Subscription } from '../subscription';
-import { SubscriptionService } from '../subscription.service';
+import { Buysubscription } from '../Classes/buysubscription';
+import { BuysubscriptionService } from '../Services/buysubscription.service';
+import { LoginService } from '../Services/login.service';
+import { Subscription } from '../Classes/subscription';
+import { SubscriptionService } from '../Services/subscription.service';
 
 @Component({
   selector: 'app-subscription',

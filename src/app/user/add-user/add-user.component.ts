@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
-import { UserService } from 'src/app/user.service';
+import { UserService } from 'src/app/Services/user.service';
 
 @Component({
   selector: 'child-cell',

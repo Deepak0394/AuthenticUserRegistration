@@ -2,17 +2,17 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { AboutComponent } from './about/about.component'
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { HomeComponent } from './Component/home/home.component';
+import { AboutComponent } from './Component/about/about.component'
+import { LoginComponent } from './Component/login/login.component';
+import { RegisterComponent } from './Component/register/register.component';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
 import { FormsModule } from '@angular/forms';
 import {ReactiveFormsModule } from  '@angular/forms'
-import { JwtintercepterService } from './jwtintercepter.service';
+import { JwtintercepterService } from './Services/jwtintercepter.service';
 import { JwtModule } from '@auth0/angular-jwt';
 import { UserComponent } from './user/user.component';
-import { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
+import { SidebarMenuComponent } from './Component/sidebar-menu/sidebar-menu.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { UserlistComponent } from './user/userlist/userlist.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
@@ -25,11 +25,11 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { SubscriptionplanComponent } from './subscription/subscriptionplan/subscriptionplan.component';
-import { DoctorComponent } from './doctor/doctor.component';
-import { HospitalComponent } from './hospital/hospital.component';
+import { DoctorComponent } from './Component/doctor/doctor.component';
+import { HospitalComponent } from './Component/hospital/hospital.component';
 import { AddUserComponent } from './user/add-user/add-user.component';
-import { RolesComponent } from './roles/roles.component';
-import { ClinicComponent } from './clinic/clinic.component';
+import { RolesComponent } from './Component/roles/roles.component';
+import { ClinicComponent } from './Component/clinic/clinic.component';
 
 @NgModule({
   declarations: [

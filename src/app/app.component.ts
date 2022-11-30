@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
+import { map } from 'rxjs';
 
-import { LoginService } from './login.service';
+import { LoginService } from './Services/login.service';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +11,20 @@ import { LoginService } from './login.service';
 export class AppComponent {
   title = 'AuthenticUserRegistration';
   sidebarExpanded = true;
+  
+   userDetail=sessionStorage['currentUser'];
+     userData=JSON.parse(this.userDetail);
+     UserNName=this.userData.name;
+ 
   constructor(public loginService:LoginService){}
   logout()
   {
     this.loginService.LogOut();
   }
-  
+  login(){
+    
+
+
+  }
 
 }

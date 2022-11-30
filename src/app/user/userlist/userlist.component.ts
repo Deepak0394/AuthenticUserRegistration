@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from 'src/app/login.service';
-import { RegisterService } from 'src/app/register.service';
-import { UserService } from 'src/app/user.service';
+import { LoginService } from 'src/app/Services/login.service';
+import { RegisterService } from 'src/app/Services/register.service';
+import { UserService } from 'src/app/Services/user.service';
 import { AddUserComponent } from '../add-user/add-user.component';
 import { UserComponent } from '../user.component';
 
