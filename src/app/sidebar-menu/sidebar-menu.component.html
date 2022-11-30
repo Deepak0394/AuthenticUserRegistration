@@ -1,0 +1,52 @@
+
+ 
+<div style="width:12%;height:1200px">
+  <div class="bg-dark">
+  <div class="sidebar-content" style="height:800px;margin: 0 0 0 0;  top:55px;  background-color: #627a92;">
+    <h1 class="set-align"><b>DashBoard</b></h1>
+    <div *ngIf="loginService.isAdmin()" class="set-sidebar-text" id="testUser">
+      <button class="btn btn-hide text-white" ><b>Users    </b>    
+      </button>
+      <div  class="set-sidebar-text" id="subMenu1">
+        <a  class="btn btn-hide text-white" (click)="gotoUser()">Add Users</a>
+        <a class="btn btn-hide text-white" (click)="gotodisplay()">User-Table</a>
+       </div>
+     
+    </div>
+    <div class="set-sidebar-text" *ngIf="loginService.isHospital()">
+      
+      <input type="radio" name="hospital" (click)="gotoHospital()">
+      Hospital
+      <br>
+    </div>
+    <div class="set-sidebar-text" *ngIf="loginService.isClinic()">
+      
+      <input type="radio" name="clinic" (click)="gotoClinic()">
+      Clinic
+      <br>
+    </div>
+
+    <div  *ngIf="loginService.isDoctor()" class="set-sidebar-text" id="testdoc">
+      <button class="btn btn-hide text-white" >Doctors       
+      </button>
+      <div class="set-sidebar-text" id="subdoc">
+        <a  class="btn btn-hide text-white" (click)="gotoDoctor()">Add Doctors</a>   
+       </div>  
+    </div>
+    <div class="set-sidebar-text" id="about">
+      <button class="btn btn-hide text-white"  (click)="goToAbout()">About Us       
+      </button>   
+    </div>
+    <div class="set-sidebar-text" id="testSubscribe">
+      <button class="btn btn-hide text-white" ><b>Subscription   </b>    
+      </button>
+      <div class="set-sidebar-text" id="subPlan">
+        <div *ngIf="loginService.isAdmin()">
+          <a  class="btn btn-hide text-white" (click)="gotoAddPlan()">Add Plan</a><br>
+        </div>      
+        <a class="btn btn-hide text-white" (click)="gotoDisPlan()">Plan List</a>
+       </div>  
+    </div>  
+  </div>
+</div> 
+</div>   

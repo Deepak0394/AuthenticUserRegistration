@@ -1,0 +1,252 @@
+<div style="position:absolute; left:500px; top:60px;" class="border-border-dark p-4 m-4" >
+    <button class="btn btn-info p-2 m-2" data-toggle="modal" data-target="#newModal"><i class="fa fa-plus"></i> Create New
+    </button>
+    <table class="table table-striped table-active p-2 m-2">
+        <thead>
+            <tr>
+                <th>Hospital-Name</th>
+                <th>Facilities</th>
+                <th>Departments</th>
+                <th>Email</th>
+                <th>PhoneNumber</th>
+                <th>Address</th>
+                <th>UserName</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let hospital of HospitalList">
+                <td>{{hospital.hospitalname}} </td>
+                <td>{{hospital.facilities}}</td>
+                <td>{{hospital.department}}</td>
+                <td>{{hospital.email}}</td>
+                <td>{{hospital.phoneNumber}}</td>
+                <td>{{hospital.address}}</td>
+                <td>{{hospital.userName}}</td> 
+                <td>
+                    <button (click)="editClick(hospital)" type="button" class="btn btn-info" data-toggle="modal"
+                data-target="#EditModal">Edit</button>
+                    <button (click)="deleteClick(hospital.id)" type="button" class="btn btn-danger p-2 m-2">Delete</button>
+                </td>
+            </tr>
+            <tr **ngFor="let doc of DoctorList"> 
+            </tr>
+        </tbody>
+    </table>
+    <form [formGroup]="saveform">
+        <!-- Create -->
+        <!-- Header -->
+        <div class="modal" role="dialog" id="newModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="modal-title">Create New </div>
+                        <button class="close" data-dismiss="modal" type="button">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <!-- Body -->
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <label for="textname" class="col-sm-4">Hospital-Name</label>
+                            <div class="col-sm-8">
+                                <input type="text"  [(ngModel)]="newHospital.hospitalname" formControlName="hospitalname" id="textname" placeholder="Name"
+                                    name="name" class="form-control">
+                                    <div class="text-danger" *ngIf="saveform.controls['hospitalname'].hasError('minlength')">
+                                        Your hospitalname must be at least 3 characters long.
+                                       </div>
+                                       <div class="text-danger" *ngIf="saveform.controls['hospitalname'].hasError('maxlength')">
+                                        Your hospitalname must not be 15 characters .
+                                       </div>
+                                       <div class="text-danger" *ngIf="saveform.get('hospitalname')?.invalid &&
+                                       (saveform.get('hospitalname')?.dirty || saveform.get('hospitalname')?.touched || submitted) ">
+                                          hospitalname  is Required.
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="textfac" class="col-sm-4">Facilities</label>
+                            <div class="col-sm-8">
+                                <input type="text" [(ngModel)]="newHospital.facilities" id="textfac"
+                                    placeholder="Facilities" name="facility" formControlName="facilities"  class="form-control">
+                                    <div class="text-danger" *ngIf="saveform.controls['facilities'].hasError('minlength')">
+                                        Your facilities must be at least 3 characters long.
+                                       </div>
+                                       <div class="text-danger" *ngIf="saveform.controls['facilities'].hasError('maxlength')">
+                                        Your facilities must not be 15 characters .
+                                       </div>
+                                       <div class="text-danger" *ngIf="saveform.get('facilities')?.invalid &&
+                                       (saveform.get('facilities')?.dirty || saveform.get('facilities')?.touched || submitted) ">
+                                          Faculity is Required.
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="texteml" class="col-sm-4">Email</label>
+                            <div class="col-sm-8">
+                                <input type="text" [(ngModel)]="newHospital.email" id="texteml"
+                                    placeholder="Email" formControlName="email" name="email" class="form-control">
+                                    <div class="text-danger" *ngIf="saveform.controls['email'].hasError('required')&& saveform.get('email')?.invalid &&
+                                    (saveform.get('email')?.dirty || saveform.get('email')?.touched || submitted)">
+                                       Enter Required
+                                    </div>
+                                    <div class="text-danger" *ngIf="saveform.controls['email'].hasError('pattern')">
+                                    Email valid Email
+                                        </div>
+                                       <div *ngIf="existemlname==true"  class="text-danger">
+                                         Email Already Exist
+                                       </div>
+                            </div>
+                        </div>
+                        <div  class="form-group form-row">
+                            <label for="txtAdd" class="col-md-4">Phone Number</label>
+                            <div class="col-md-8">
+                            <ngx-intl-tel-input  [enableAutoCountrySelect]="true" [enablePlaceholder]="true"
+                            [searchCountryFlag]="true" [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                            [selectFirstCountry]="true" [maxLength]="10" 
+                            [selectedCountryISO]="CountryISO.India"
+                            [phoneValidation]="true" [separateDialCode]="true" name="phoneNumber" formControlName="phoneNumber" >
+                           
+                         </ngx-intl-tel-input>
+                         
+                     
+                         <div class="text-danger" *ngIf="saveform.controls['phoneNumber'].errors">
+                          Enter Correct Number
+                    </div>
+                    <div *ngIf="existphnname==true"  class="text-danger">
+                        Phone Number  Already Exist
+                      </div>
+                       </div>
+                       
+                        </div>
+                        <div class="form-group row">
+                            <label for="textdept" class="col-sm-4">Address</label>
+                            <div class="col-sm-8">
+                                <input type="text" [(ngModel)]="newHospital.address" id="textdept"
+                                    placeholder="Phone Number" formControlName="address" name="address" class="form-control">
+                                    <div class="text-danger" *ngIf="saveform.controls['address'].hasError('minlength')">
+                                        Address must be at least 3 characters long.
+                                        </div>
+                                        <div class="text-danger" *ngIf="saveform.controls['address'].hasError('maxlength')">
+                                         Your  Address must not be greater than 25 characters .
+                                        </div>
+                                        <div class="text-danger" *ngIf="saveform.get('address')?.invalid &&
+                                        (saveform.get('address')?.dirty || saveform.get('address')?.touched || submitted) ">
+                                          Address  is Required.
+                                     </div>
+                                       
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="textdept" class="col-sm-4">UserName</label>
+                            <div class="col-sm-8">
+                                <input type="text" [(ngModel)]="newHospital.userName" id="textdept"
+                                    placeholder="UserName" formControlName="userName" name="userName" class="form-control">
+                                    <div class="text-danger" *ngIf="saveform.controls['userName'].hasError('minlength')">
+                                        userName must be at least 3 characters long.
+                                        </div>
+                                        <div class="text-danger" *ngIf="saveform.controls['userName'].hasError('maxlength')">
+                                         Your  userName must not be greater than 25 characters .
+                                        </div>
+                                        <div class="text-danger" *ngIf="saveform.get('userName')?.invalid &&
+                                        (saveform.get('userName')?.dirty || saveform.get('userName')?.touched || submitted) ">
+                                          userName  is Required.
+                                     </div>
+                                     <div *ngIf="existusrname==true"  class="text-danger">
+                                       User Name Already Exist
+                                      </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="textdept" class="col-sm-4">Departments</label>
+                            <div class="col-sm-8">
+                                <input type="text" [(ngModel)]="newHospital.department" id="textdept"
+                                    placeholder="Department Name" formControlName="department" name="dept" class="form-control">
+                                    <div class="text-danger" *ngIf="saveform.controls['department'].hasError('minlength')">
+                                        department must be at least 3 characters long.
+                                        </div>
+                                        <div class="text-danger" *ngIf="saveform.controls['department'].hasError('maxlength')">
+                                         Your Street department must not be greater than 25 characters .
+                                        </div>
+                                        <div class="text-danger" *ngIf="saveform.get('department')?.invalid &&
+                                        (saveform.get('department')?.dirty || saveform.get('department')?.touched || submitted) ">
+                                          department  is Required.
+                                     </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <!-- <footer> -->
+                    <div class="modal-footer">
+                        <button (click)="saveClick()" type="submit" class="btn btn-success" >Save</button>
+                        <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <form>
+        <!-- Header -->
+        <div class="modal" role="dialog" id="EditModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="modal-title">Edit Hospital</div>
+                        <button class="close" data-dismiss="modal" type="button">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <!-- Body -->
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <label for="textname" class="col-sm-4">Hospital-Name</label>
+                            <div class="col-sm-8">
+                                <input type="text" [(ngModel)]="newHospital.hospitalname" id="textname" name="name"
+                                    class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="texadd" class="col-sm-4">Facilities</label>
+                            <div class="col-sm-8">
+                                <input type="text" [(ngModel)]="newHospital.facilities" id="textadd" name="facility"
+                                    class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="textdept" class="col-sm-4">Departments</label>
+                            <div class="col-sm-8">
+                                <input type="text" [(ngModel)]="newHospital.department" id="textdept" name="dept"
+                                    class="form-control">
+                            </div>
+                        </div>
+                        <!-- <div class="form-group row">
+                <label for="textdoc" class="col-sm-4">Doctor's Name</label>
+                <div class="col-sm-8">
+                    <input   type="text" [(ngModel)]="newHospital.doctorlist.doctorname"  id="textdoc"  name="doc" class="form-control">
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label for="textqua" class="col-sm-4">Doctor's Qualification</label>
+                <div class="col-sm-8">
+                    <input   type="text" [(ngModel)]="newHospital.doctorlist.qualification"  id="textqua"  name="qua" class="form-control">
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label for="textexp" class="col-sm-4">Doctor's Expierence</label>
+                <div class="col-sm-8">
+                    <input   type="text" [(ngModel)]="newHospital.doctorlist.expierence"  id="textexp" placeholder="Doctor Expierence" name="exp" class="form-control">
+                </div>
+            </div> -->
+                    </div>
+                    <!-- <footer> -->
+                    <div class="modal-footer">
+                        <button (click)="updateClick()" class="btn btn-success" data-dismiss="modal">Update</button>
+                        <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

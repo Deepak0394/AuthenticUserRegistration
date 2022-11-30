@@ -1,0 +1,212 @@
+<div style="position:absolute; left:500px; top:60px;" class="border-border-dark p-4 m-4" >
+    <button class="btn btn-info p-2 m-2" data-toggle="modal" data-target="#newModal"><i class="fa fa-plus"></i> Create New
+    </button>
+    <table class="table table-striped table-active p-2 m-2">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>PhoneNumber</th>
+                <th>Facilities</th>
+                <th>Emergency-No</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let clinic of ClinicList">
+                <td>{{clinic.name}} </td>
+                <td>{{clinic.address}}</td>
+                <td>{{clinic.email}}</td>
+                <td>{{clinic.phoneNo}}</td>
+                <td>{{clinic.facilities}}</td>
+                <td>{{clinic.emergencyNo}}</td>
+                <td>
+                    <button (click)="editClick(clinic)" type="button" class="btn btn-info" data-toggle="modal"
+                data-target="#EditModal">Edit</button>
+                    <button (click)="deleteClick(clinic.id)" type="button" class="btn btn-danger p-2 m-2">Delete</button>
+                </td>
+            </tr>
+            <!-- <tr **ngFor="let doc of DoctorList"> 
+            </tr> -->
+        </tbody>
+    </table>
+    <form [formGroup]="saveform">
+        <!-- Create -->
+        <!-- Header -->
+        <div class="modal" role="dialog" id="newModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="modal-title">Create New </div>
+                        <button class="close" data-dismiss="modal" type="button">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <!-- Body -->
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <label for="textname" class="col-sm-4">Name</label>
+                            <div class="col-sm-8">
+                                <input type="text"  [(ngModel)]="newClinic.name" formControlName="name" id="textname" placeholder="Name"
+                                    name="name" class="form-control">
+                                    <div class="text-danger" *ngIf="saveform.controls['name'].hasError('minlength')">
+                                        Your hospitalname must be at least 3 characters long.
+                                       </div>
+                                       <div class="text-danger" *ngIf="saveform.controls['name'].hasError('maxlength')">
+                                        Your hospitalname must not be 15 characters .
+                                       </div>
+                                       <div class="text-danger" *ngIf="saveform.get('name')?.invalid &&
+                                       (saveform.get('name')?.dirty || saveform.get('name')?.touched || submitted) ">
+                                          Name  is Required.
+                                    </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="textdept" class="col-sm-4">Address</label>
+                            <div class="col-sm-8">
+                                <input type="text" [(ngModel)]="newClinic.address" id="textdept"
+                                    placeholder="Phone Number" formControlName="address" name="address" class="form-control">
+                                    <div class="text-danger" *ngIf="saveform.controls['address'].hasError('minlength')">
+                                        Address must be at least 3 characters long.
+                                        </div>
+                                        <div class="text-danger" *ngIf="saveform.controls['address'].hasError('maxlength')">
+                                         Your  Address must not be greater than 25 characters .
+                                        </div>
+                                        <div class="text-danger" *ngIf="saveform.get('address')?.invalid &&
+                                        (saveform.get('address')?.dirty || saveform.get('address')?.touched || submitted) ">
+                                          Address  is Required.
+                                     </div>
+                                       
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="texteml" class="col-sm-4">Email</label>
+                            <div class="col-sm-8">
+                                <input type="text" [(ngModel)]="newClinic.email" id="texteml"
+                                    placeholder="Email" formControlName="email" name="email" class="form-control">
+                                    <div class="text-danger" *ngIf="saveform.controls['email'].hasError('required')&& saveform.get('email')?.invalid &&
+                                    (saveform.get('email')?.dirty || saveform.get('email')?.touched || submitted)">
+                                       Enter Required
+                                    </div>
+                                    <div class="text-danger" *ngIf="saveform.controls['email'].hasError('pattern')">
+                                    Email valid Email
+                                        </div>
+                                       <div *ngIf="emailAlredyExist!=''"  class="text-danger">
+                                         Email Already Exist
+                                       </div>
+                            </div>
+                        </div>
+
+                        <div  class="form-group form-row">
+                            <label for="txtAdd" class="col-md-4">Phone Number</label>
+                            <div class="col-md-8">
+                            <ngx-intl-tel-input  [enableAutoCountrySelect]="true" [enablePlaceholder]="true"
+                            [searchCountryFlag]="true" [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                            [selectFirstCountry]="true" [maxLength]="10" 
+                            [selectedCountryISO]="CountryISO.India"
+                            [phoneValidation]="true" [separateDialCode]="true" name="phoneNo" formControlName="phoneNo" >
+                            </ngx-intl-tel-input>
+                          <div class="text-danger" *ngIf="saveform.controls['phoneNo'].errors">
+                                Enter Correct Number
+                            </div>
+                        </div>
+                    
+
+                        </div>
+                        <div class="form-group row">
+                            <label for="textfac" class="col-sm-4">Facilities</label>
+                            <div class="col-sm-8">
+                                <input type="text" [(ngModel)]="newClinic.facilities" id="textfac"
+                                    placeholder="Facilities" name="facility" formControlName="facilities"  class="form-control">
+                                    <div class="text-danger" *ngIf="saveform.controls['facilities'].hasError('minlength')">
+                                        Your facilities must be at least 3 characters long.
+                                       </div>
+                                       <div class="text-danger" *ngIf="saveform.controls['facilities'].hasError('maxlength')">
+                                        Your facilities must not be 15 characters .
+                                       </div>
+                                       <div class="text-danger" *ngIf="saveform.get('facilities')?.invalid &&
+                                       (saveform.get('facilities')?.dirty || saveform.get('facilities')?.touched || submitted) ">
+                                          Faculity is Required.
+                                    </div>
+                            </div>
+                        </div>
+           
+                        <div  class="form-group form-row">
+                            <label for="txtAdd" class="col-md-4">Emergency-No</label>
+                            <div class="col-md-8">
+                            <ngx-intl-tel-input  [enableAutoCountrySelect]="true" [enablePlaceholder]="true"
+                            [searchCountryFlag]="true" [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                            [selectFirstCountry]="true" [maxLength]="10" 
+                            [selectedCountryISO]="CountryISO.India"
+                            [phoneValidation]="true" [separateDialCode]="true" name="emergencyNo" formControlName="emergencyNo" >
+                           
+                         </ngx-intl-tel-input>
+                         
+                     
+                         <div class="text-danger" *ngIf="saveform.controls['emergencyNo'].errors">
+                          Enter Correct Number
+                    </div>
+                       </div>
+                       
+                        </div>
+           
+                    </div>
+                    <!-- <footer> -->
+                    <div class="modal-footer">
+                        <button (click)="saveClick()" type="submit" class="btn btn-success" >Save</button>
+                        <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <form>
+        <!-- Header -->
+        <div class="modal" role="dialog" id="EditModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="modal-title">Edit Hospital</div>
+                        <button class="close" data-dismiss="modal" type="button">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <!-- Body -->
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <label for="textname" class="col-sm-4">Name</label>
+                            <div class="col-sm-8">
+                                <input type="text" [(ngModel)]="newClinic.name" id="textname" name="name"
+                                    class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="texadd" class="col-sm-4">Facilities</label>
+                            <div class="col-sm-8">
+                                <input type="text" [(ngModel)]="newClinic.facilities" id="textadd" name="facility"
+                                    class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="textdept" class="col-sm-4">Departments</label>
+                            <div class="col-sm-8">
+                                <input type="text" [(ngModel)]="newClinic.address" id="textdept" name="dept"
+                                    class="form-control">
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <!-- <footer> -->
+                    <div class="modal-footer">
+                        <button (click)="updateClick()" class="btn btn-success" data-dismiss="modal">Update</button>
+                        <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
