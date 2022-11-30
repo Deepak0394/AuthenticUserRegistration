@@ -49,10 +49,17 @@ password: ['', [Validators.required]],
           this.toastr.success("Welcome to Paperless Prescription ",'Login Successfully ',);
           this.router.navigateByUrl("/home"); 
         }
-        else 
+        else if(userRole=='Doctor')
         {
-          alert("page not found");
+          console.log(userRole)
+          this.toastr.success("Welcome to Paperless Prescription ",'Login Successfully ',);
+          this.router.navigateByUrl("/home"); 
         }
+        
+        // else 
+        // {
+        //   alert("page not found");
+        // }
               
       },
       (error)=>{console.log(error)

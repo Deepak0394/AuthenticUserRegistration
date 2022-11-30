@@ -107,24 +107,7 @@
           
            </div>
            
-            <!-- <div class="form-group form-row">
-               
-               <label for="txtphn" class="col-md-4">Phone Number</label>
-              <div class="col-md-8">
-                 <input
-             
-                  id="txtphn" name="phoneNumber" type="text" formControlName="phoneNumber"  placeholder=" Phone Number "  class="form-control">
-                 
-                  <div class="text-danger" *ngIf="saveform.controls['phoneNumber'].hasError('maxlength')">
-                  Must Include (+91 Country Code) Your Phone Number  must not be 10 characters  .
-                  </div>
-                  <div class="text-danger" *ngIf="saveform.get('phoneNumber')?.invalid &&
-                  (saveform.get('phoneNumber')?.dirty || saveform.get('phoneNumber')?.touched || submitted) ">
-                     Phone Number is Required.
-               </div>
-              </div>
-   
-           </div> -->
+      
             <div class="form-group form-row">
                 <label for="txtState" class="col-md-4">State</label>
                <div class="col-md-8">
@@ -171,7 +154,7 @@
                <div class="col-md-8">
                   <input
               
-                   id="txtCode" name="postalCode" type="number" formControlName="postalCode"  placeholder="Postal Code"  class="form-control">
+                   id="txtCode" name="postalCode" type="number" formControlName="postalCode"  placeholder="Postal Code" minlength="0" maxlength="6" class="form-control">
                    <div class="text-danger" *ngIf="saveform.controls['postalCode'].hasError('pattern')">
                   6 Digit Pin code Required
                     </div>
